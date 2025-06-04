@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using TwinSim.Domain.Interfaces;
+using TwinSim.Domain.Models;
 using TwinSim.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ var app = builder.Build();
 FakeDate(app.Services.GetRequiredService<ITwinService>());
 
 app.MapControllers();
+app.MapGet("/", () => "L'API TOURNE");
 
 app.Run();
 
