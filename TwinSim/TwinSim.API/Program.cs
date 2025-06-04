@@ -23,20 +23,20 @@ static void FakeDate(ITwinService service)
     {
         Name = "Drone A1",
         Position = new Position(10, 0, 5),
-        Status = TwinStatus.Active
+        Status = Status.Active
     });
 
     service.Create(new TwinObject
     {
         Name = "Capteur B2",
         Position = new Position(-3, 2, 1),
-        Status = TwinStatus.Inactive
+        Status = Status.Inactive
     });
 
     service.Create(new TwinObject
     {
         Name = "Bras Mécanique C3",
         Position = new Position(0, 0, 0),
-        Status = TwinStatus.Error
+        Status = Status.Error
     });
 }
