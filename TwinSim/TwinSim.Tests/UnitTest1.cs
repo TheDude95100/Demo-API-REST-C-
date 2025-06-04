@@ -13,6 +13,9 @@ public class TwinServiceTests
     public TwinServiceTests()
     {
         _service = new TwinService();
+
+        _service.Create(new TwinObject { Name = "Twin 1" });
+        _service.Create(new TwinObject { Name = "Twin 2" });
     }
 
     [Fact]
@@ -67,20 +70,23 @@ public class TwinServiceTests
         var original = _service.GetAll().First();
         var updatedTwin = new TwinObject { Name = "Updated Name" };
 
-        var updated = _service.Update(original.Id, updatedTwin);
+        var result = _service.Update(original.Id, updatedTwin);
 
-        Assert.NotNull(updated);
-        Assert.Equal(original.Id, updated.Id);
-        Assert.Equal("Updated Name", updated.Name);
+        Assert.True(result);
+
+        var fetched = _service.GetById(original.Id);
+        Assert.NotNull(fetched);
+        Assert.Equal(original.Id, fetched.Id);
+        Assert.Equal("Updated Name", fetched.Name);
     }
 
     [Fact]
-    public void Update_ShouldReturnNullForUnknownId()
+    public void Update_ShouldReturnFalseForUnknownId()
     {
         var unknownId = Guid.NewGuid();
         var updated = _service.Update(unknownId, new TwinObject { Name = "Nobody" });
 
-        Assert.Null(updated);
+        Assert.False(updated);
     }
 
     [Fact]
