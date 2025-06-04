@@ -41,6 +41,7 @@ namespace TwinSim.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteById(Guid id)
         {
-            return _twinService(id) ? NoContent() : NotFound();
+            return _twinService.Delete(id) ? NoContent() : NotFound();
         }
+    }
 }
